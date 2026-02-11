@@ -18,13 +18,20 @@ if (isset($_SESSION['login'])) {
 $error = "";
 if (isset($_POST['login'])) {
     $username = mysqli_real_escape_string($conn, $_POST['username']);
-    $password = md5($_POST['password']);
-    $query = mysqli_query($conn, "SELECT * FROM users WHERE username='$username' AND password='$password'");
+    $password_input = $_POST['password'];
+    $query = mysqli_query($conn, "SELECT * FROM users WHERE username='$username'");
     if (mysqli_num_rows($query) == 1) {
-        $_SESSION['login'] = true;
-        $_SESSION['username'] = $username;
-        header("Location: dashboard.php");
-        exit;
+        $user = mysqli_fetch_assoc($query);
+        $password_db = $user['password'];
+        // Cek password_hash (bcrypt) atau md5
+        if (password_verify($password_input, $password_db) || md5($password_input) === $password_db) {
+            $_SESSION['login'] = true;
+            $_SESSION['username'] = $username;
+            header("Location: dashboard.php");
+            exit;
+        } else {
+            $error = "Username / Password tidak sesuai";
+        }
     } else {
         $error = "Username / Password tidak sesuai";
     }
