@@ -43,7 +43,7 @@ INSERT INTO users (username, password) VALUES ('admin', MD5('admin123'));
 INSERT INTO kategori (nama_kategori) VALUES ('Mobile Legend'), ('Roblox'), ('Free Fire');
 
 -- Contoh Produk
-INSERT INTO produk (kode_produk, nama_produk, harga, stok, id_kategori) VALUES
+INSERT INTO produk (kode_produk, nama_produk, deskripsi, gambar, harga, stok, id_kategori) VALUES
 ('P0001', 'Weekly Diamond Pass Region Indonesia', 'khusus region indonesia', '', 26500, 10, 1),
 ('P0002', '350 Diamond Free Fire', '350 diamond free fire', '', 50000, 50, 2),
 ('P0003', '100 Robux via Login', 'format dikirim ke whatsapp admin', '', 15000, 100, 3);
